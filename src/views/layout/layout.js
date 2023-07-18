@@ -5,12 +5,13 @@ import "./index.css";
 const Layout = () => {
   return (
     <>
-      <header>
+      <header className="container">
         <Link to="/">Home</Link>
         <Link to="podcast">Podcast</Link>
         <Link to="podcast/episode">Episode</Link>
+        <h1>Podcasts</h1>
+        <br />
       </header>
-      <h1>Podcasts</h1>
       <main className="container">
         <Outlet />
       </main>
