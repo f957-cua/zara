@@ -3,16 +3,22 @@ import { Link } from "react-router-dom";
 import "./index.css";
 
 const CommonView = () => {
-  return (
-    <>
-      <header>
-        <Link to="/">Home</Link>
-        <Link to="podcast">Podcast</Link>
-        <Link to="podcast/episode">Episode</Link>
-      </header>
-      <h1>CommonView</h1>
-    </>
-  );
+    const [podcasts, setPodcasts] = useState([]);
+
+    useEffect(() => {
+      fetch(
+        "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"
+      )
+        .then((res) => res.json())
+        .then(({ feed }) => setPodcasts(feed.entry));
+    }, []);
+    console.log(podcasts);
+
+    return (
+      <>
+        <h1>CommonView</h1>
+      </>
+    );
 };
 
 export default CommonView;
