@@ -5,3 +5,7 @@
 h1 {
     color: #ff0000;
 }
+.active {
+    color: #ff0000;
+    cursor: default;
+}
