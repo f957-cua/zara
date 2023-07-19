@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./index.css";
 import Cards from "../../components/cards/cards";
 
+const filterBySearch = (podcasts, search) => podcasts.filter(item => item?.["im:name"].label.concat(item?.["im:artist"].label).includes(search))
+
 const CommonView = () => {
   const [podcasts, setPodcasts] = useState([]);
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     fetch(
@@ -16,7 +18,28 @@ const CommonView = () => {
 
   return (
     <>
-      <Cards podcasts={podcasts} />
+      <div className="common_block">
+        <h2>
+          {
+            filterBySearch(
+              podcasts,
+              search
+            ).length
+          }
+        </h2>
+        <input
+          className="input"
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
+      </div>
+      <Cards
+        podcasts={filterBySearch(
+          podcasts,
+          search
+        )}
+      />
     </>
   );
 };
