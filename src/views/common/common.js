@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import "./index.css";
 import Cards from "../../components/cards/cards";
 
-const filterBySearch = (podcasts, search) => podcasts.filter(item => item?.["im:name"].label.concat(item?.["im:artist"].label).includes(search))
+const filterBySearch = (podcasts, search) =>
+  podcasts.filter((item) =>
+    item?.["im:name"].label.concat(item?.["im:artist"].label).includes(search)
+  );
 
 const CommonView = () => {
   const [podcasts, setPodcasts] = useState([]);
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     fetch(
@@ -16,30 +20,18 @@ const CommonView = () => {
       .then(({ feed }) => setPodcasts(feed.entry));
   }, []);
 
+  const handleSearch = (e) => {
+    startTransition(() => setSearch(e.target.value));
+  };
+
   return (
     <>
       <div className="common_block">
-        <h2>
-          {
-            filterBySearch(
-              podcasts,
-              search
-            ).length
-          }
-        </h2>
-        <input
-          className="input"
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
+        {isPending && <div className="pending"></div>}
+        <h2>{filterBySearch(podcasts, search).length}</h2>
+        <input className="input" onChange={handleSearch} />
       </div>
-      <Cards
-        podcasts={filterBySearch(
-          podcasts,
-          search
-        )}
-      />
+      <Cards podcasts={filterBySearch(podcasts, search)} />
     </>
   );
 };
