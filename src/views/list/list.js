@@ -13,7 +13,11 @@ const ListView = () => {
           src={state?.["im:image"][2].label}
           alt={state?.["im:name"].label}
         />
-        <h2 className="card_podcast">{state?.["im:name"].label}</h2>
+        <p className="card_author">{state?.["im:artist"].label}</p>
+        {/* <h2 className="card_podcast">by {state?.["im:name"].label}</h2> */}
+        <h2 className="card_podcast">by SongExploder</h2>
+        {/* <p className="card_description">{state?.summary}</p> */}
+        <p className="card_description">summary...</p>
       </div>
       <div className="box_container">
         <h2>Episodes: </h2>
@@ -23,8 +27,8 @@ const ListView = () => {
             <p className="episode_item">Release date</p>
           </li>
           <li className="episode_box">
-            <p className="episode_item">Title</p>
-            <p className="episode_item">Release date</p>
+            <p className="episode_item">Podcasts titles</p>
+            <p className="episode_item">11/08/2021</p>
           </li>
         </ul>
       </div>
