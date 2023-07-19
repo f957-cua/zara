@@ -6,10 +6,9 @@ const Layout = () => {
   return (
     <>
       <header className="container">
-        <Link to="/">Home</Link>
-        <Link to="podcast">Podcast</Link>
-        <Link to="podcast/episode">Episode</Link>
-        <h1>Podcasts</h1>
+        <Link to="/">
+          <h1>Podcasts</h1>
+        </Link>
         <br />
       </header>
       <main className="container">
